@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"></html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +35,6 @@
             line-height: 1.6;
         }
 
-        /* Animated Background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -61,12 +60,11 @@
             100% { transform: translate(50px, 50px); }
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
@@ -84,26 +82,19 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: -0.05em;
-            color: var(--text-dark);
         }
 
         .logo img {
-            width: 45px;
-            height: 45px;
+            height: 50px;
             object-fit: contain;
         }
 
-        .logo-text {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         .nav-links {
@@ -123,10 +114,6 @@
             gap: 0.5rem;
         }
 
-        .nav-links a i {
-            font-size: 1rem;
-        }
-
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -142,7 +129,82 @@
             width: 100%;
         }
 
-        /* Hero Section */
+        .language-switcher {
+            position: relative;
+        }
+
+        .lang-btn {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem;
+            display: none;
+            min-width: 150px;
+        }
+
+        .lang-dropdown.active {
+            display: block;
+            animation: fadeInDown 0.3s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lang-option {
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .lang-option:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+
+        .lang-option.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
         .hero {
             min-height: 100vh;
             display: flex;
@@ -202,10 +264,6 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .btn i {
-            font-size: 1.1rem;
-        }
-
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
@@ -239,7 +297,6 @@
             }
         }
 
-        /* Stats Section */
         .stats {
             padding: 4rem 2rem;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
@@ -280,7 +337,6 @@
             font-weight: 500;
         }
 
-        /* Projects Section */
         .section {
             padding: 6rem 2rem;
             max-width: 1400px;
@@ -334,10 +390,6 @@
             border-radius: 12px;
         }
 
-        .project-icon-emoji {
-            font-size: 2.5rem;
-        }
-
         .project-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
@@ -367,11 +419,15 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Team Section */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-grid.bottom-row {
+            grid-template-columns: repeat(4, 1fr);
         }
 
         .team-card {
@@ -391,16 +447,20 @@
         }
 
         .avatar {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
             margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            font-weight: 700;
+            overflow: hidden;
+            border: 4px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, var(--primary), var(--accent)) border-box;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .team-card h4 {
@@ -449,7 +509,6 @@
             transform: translateY(-3px);
         }
 
-        /* Contact Section */
         .contact {
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
             padding: 6rem 2rem;
@@ -476,7 +535,6 @@
             line-height: 1.7;
         }
 
-        /* Footer */
         footer {
             padding: 2rem;
             text-align: center;
@@ -492,7 +550,6 @@
             font-weight: 500;
         }
 
-        /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -500,6 +557,16 @@
             color: var(--text-dark);
             font-size: 1.5rem;
             cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid.bottom-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -511,8 +578,12 @@
                 display: block;
             }
 
-            .projects-grid,
-            .team-grid {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid,
+            .team-grid.bottom-row {
                 grid-template-columns: 1fr;
             }
 
@@ -521,7 +592,6 @@
             }
         }
 
-        /* Scroll Indicator */
         .scroll-indicator {
             position: absolute;
             bottom: 2rem;
@@ -555,26 +625,45 @@
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <img src="https://github.com/M3CodeDev/.github/blob/main/profile/Logos/Logo.png?raw=true" alt="M3 Codes Logo">
-                <span class="logo-text">M3Code</span>
+                <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/M3CodeLogo.png" alt="M3Code Logo">
             </div>
-            <ul class="nav-links">
-                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#projects"><i class="fas fa-folder-open"></i> Projects</a></li>
-                <li><a href="#team"><i class="fas fa-users"></i> Team</a></li>
-                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#home"><i class="fas fa-home"></i> <span data-key="nav_home">Home</span></a></li>
+                    <li><a href="#projects"><i class="fas fa-folder-open"></i> <span data-key="nav_projects">Projects</span></a></li>
+                    <li><a href="#team"><i class="fas fa-users"></i> <span data-key="nav_team">Team</span></a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> <span data-key="nav_contact">Contact</span></a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="lang-btn" onclick="toggleLangDropdown()">
+                        <i class="fas fa-globe"></i>
+                        <span id="current-lang">EN</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option active" onclick="changeLang('en')">
+                            🇬🇧 English
+                        </div>
+                        <div class="lang-option" onclick="changeLang('tr')">
+                            🇹🇷 Türkçe
+                        </div>
+                        <div class="lang-option" onclick="changeLang('ar')">
+                            🇸🇦 العربية
+                        </div>
+                    </div>
+                </div>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
         </div>
     </nav>
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Innovating Today, Shaping Tomorrow</h1>
-            <p>A dynamic software team specialized in artificial intelligence, mobile app development, and web technologies.</p>
+            <h1 data-key="hero_title">Innovating Today, Shaping Tomorrow</h1>
+            <p data-key="hero_subtitle">A dynamic software team specialized in artificial intelligence, mobile app development, and web technologies.</p>
             <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> Explore Our Projects</a>
-                <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Contact Us</a>
+                <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> <span data-key="hero_cta1">Explore Our Projects</span></a>
+                <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> <span data-key="hero_cta2">Contact Us</span></a>
             </div>
         </div>
         <div class="scroll-indicator"></div>
@@ -584,32 +673,59 @@
         <div class="stats-grid">
             <div class="stat-item">
                 <h3><i class="fas fa-users"></i> 7+</h3>
-                <p>Team Members</p>
+                <p data-key="stat_members">Team Members</p>
             </div>
             <div class="stat-item">
-                <h3><i class="fas fa-rocket"></i> 6+</h3>
-                <p>Completed Projects</p>
+                <h3><i class="fas fa-rocket"></i> 11+</h3>
+                <p data-key="stat_projects">Completed Projects</p>
             </div>
             <div class="stat-item">
-                <h3><i class="fas fa-trophy"></i> 7th</h3>
-                <p>TEKNOFEST Ranking</p>
+                <h3><i class="fas fa-trophy"></i> Top 7</h3>
+                <p data-key="stat_ranking">Teknofest Trendyol Hackathon Finalist</p>
             </div>
             <div class="stat-item">
                 <h3><i class="fas fa-fire"></i> 100%</h3>
-                <p>Passion & Innovation</p>
+                <p data-key="stat_passion">Passion & Innovation</p>
             </div>
         </div>
     </section>
 
     <section class="section" id="projects">
-        <h2 class="section-title">Our Projects</h2>
+        <h2 class="section-title" data-key="projects_title">Our Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-header">
-                    <img src="https://github.com/M3CodeDev/.github/blob/main/profile/Logos/udlogo.png?raw=true" alt="Forgetful Friend" class="project-icon">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/hackathon.png" alt="Teknofest Hackathon" class="project-icon">
+                    <h3>Trendyol AI Hackathon</h3>
+                </div>
+                <p data-key="project_hackathon">AI-powered recommendation system developed for Teknofest Trendyol E-Commerce Hackathon. Top 10 finalist among 300+ teams with LLM-based personalized product predictions.</p>
+                <div class="tags">
+                    <span class="tag">AI/ML</span>
+                    <span class="tag">LLM</span>
+                    <span class="tag">UI/UX</span>
+                    <span class="tag">Finalist</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/formarch.png" alt="Formarch Energy" class="project-icon">
+                    <h3>Formarch Energy</h3>
+                </div>
+                <p data-key="project_formarch">Multi-language corporate energy services platform with role-based interfaces, purchase processes, personalized discounts, and admin dashboard. Built with Laravel and modern web technologies.</p>
+                <div class="tags">
+                    <span class="tag">Laravel</span>
+                    <span class="tag">Tailwind</span> 
+                    <span class="tag">Enterprise</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/udlogo.png" alt="Forgetful Friend" class="project-icon">
                     <h3>Unutma Dostu</h3>
                 </div>
-                <p>A compassionate mobile app that assists Alzheimer's patients and individuals with memory challenges.</p>
+                <p data-key="project_ud">A compassionate mobile app that assists Alzheimer's patients and individuals with memory challenges.</p>
                 <div class="tags">
                     <span class="tag">Flutter</span>
                     <span class="tag">Firebase</span>
@@ -619,10 +735,10 @@
 
             <div class="project-card">
                 <div class="project-header">
-                    <img src="https://github.com/M3CodeDev/.github/blob/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/PasstleLogo.png?raw=true" alt="Passtle" class="project-icon">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/PasstleLogo.png" alt="Passtle" class="project-icon">
                     <h3>Passtle</h3>
                 </div>
-                <p>A locally encrypted password manager with AES-256. Your privacy is our priority.</p>
+                <p data-key="project_passtle">A locally encrypted password manager with AES-256. Your privacy is our priority.</p>
                 <div class="tags">
                     <span class="tag">Security</span>
                     <span class="tag">Encryption</span>
@@ -632,10 +748,10 @@
 
             <div class="project-card">
                 <div class="project-header">
-                    <img src="https://github.com/M3CodeDev/.github/blob/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/OsharaLogo.png?raw=true" alt="Oshara" class="project-icon">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/OsharaLogo.png" alt="Oshara" class="project-icon">
                     <h3>Oshara</h3>
                 </div>
-                <p>Smart expense-sharing platform for roommates. Fair calculations and a democratic reconciliation system.</p>
+                <p data-key="project_oshara">Smart expense-sharing platform for roommates. Fair calculations and a democratic reconciliation system.</p>
                 <div class="tags">
                     <span class="tag">Firebase</span>
                     <span class="tag">Real-time</span>
@@ -645,10 +761,10 @@
 
             <div class="project-card">
                 <div class="project-header">
-                    <img src="https://github.com/M3CodeDev/.github/blob/main/profile/Logos/FotviaLogo2.jpg?raw=true" alt="Fotvia" class="project-icon">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/FotviaLogo2.jpg" alt="Fotvia" class="project-icon">
                     <h3>Fotvia</h3>
                 </div>
-                <p>An AI-powered photo editing platform. Technology that revolutionizes image enhancement.</p>
+                <p data-key="project_fotvia">An AI-powered photo editing platform. Technology that revolutionizes image enhancement.</p>
                 <div class="tags">
                     <span class="tag">AI/ML</span>
                     <span class="tag">Computer Vision</span>
@@ -658,10 +774,10 @@
 
             <div class="project-card">
                 <div class="project-header">
-                    <img src="https://github.com/M3CodeDev/.github/blob/main/profile/Logos/ikaricon.png?raw=true" alt="Ikra" class="project-icon">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/ikaricon.png" alt="Ikra" class="project-icon">
                     <h3>Ikra</h3>
                 </div>
-                <p>Book discovery and community platform. A comprehensive catalog that connects readers with their next favorites.</p>
+                <p data-key="project_ikra">Book discovery and community platform. A comprehensive catalog that connects readers with their next favorites.</p>
                 <div class="tags">
                     <span class="tag">Social</span>
                     <span class="tag">Recommendations</span>
@@ -671,10 +787,10 @@
 
             <div class="project-card">
                 <div class="project-header">
-                    <img src="https://github.com/M3CodeDev/.github/blob/main/profile/Logos/appicon.png?raw=true" alt="HungerJet" class="project-icon">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/appicon.png" alt="HungerJet" class="project-icon">
                     <h3>HungerJet</h3>
                 </div>
-                <p>Next-gen delivery platform revolutionizing food ordering. Speed, quality, and satisfaction.</p>
+                <p data-key="project_hungerjet">Next-gen delivery platform revolutionizing food ordering. Speed, quality, and satisfaction.</p>
                 <div class="tags">
                     <span class="tag">E-commerce</span>
                     <span class="tag">Real-time Tracking</span>
@@ -685,13 +801,15 @@
     </section>
 
     <section class="section" id="team">
-        <h2 class="section-title">Our Team</h2>
+        <h2 class="section-title" data-key="team_title">Our Team</h2>
         <div class="team-grid">
             <div class="team-card">
-                <div class="avatar">MY</div>
+                <div class="avatar">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/mxy.png" alt="Muhammed Yusufoglu">
+                </div>
                 <h4>Muhammed Yusufoglu</h4>
-                <p class="role">Co-Founder | UI/UX Designer</p>
-                <p class="skills">Mobile Development, User Experience</p>
+                <p class="role" data-key="role_my">Co-Founder | UI/UX Designer</p>
+                <p class="skills" data-key="skills_my">Mobile Development, User Experience</p>
                 <div class="social-links">
                     <a href="https://github.com/mxy963" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/mxy963/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -699,10 +817,12 @@
             </div>
 
             <div class="team-card">
-                <div class="avatar">MB</div>
+                <div class="avatar">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/bereket.png" alt="Muhammed Bereket">
+                </div>
                 <h4>Muhammed Bereket</h4>
-                <p class="role">Co-Founder | AI Specialist</p>
-                <p class="skills">Artificial Intelligence, Machine Learning</p>
+                <p class="role" data-key="role_mb">Co-Founder | AI Specialist</p>
+                <p class="skills" data-key="skills_mb">Artificial Intelligence, Machine Learning</p>
                 <div class="social-links">
                     <a href="https://github.com/MuBereket" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/muhammed-bereket-526390307" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -710,21 +830,27 @@
             </div>
 
             <div class="team-card">
-                <div class="avatar">M</div>
-                <h4>Mahmoud Basmaci</h4>
-                <p class="role">Co-Founder | Mobile Developer</p>
-                <p class="skills">Flutter, Dart, Software Development</p>
+                <div class="avatar">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/mahmut.png" alt="Mahmoud Basmaci">
+                </div>
+                <h4>Mahmut Basmacı</h4>
+                <p class="role" data-key="role_m">Co-Founder | Mobile Developer</p>
+                <p class="skills" data-key="skills_m">Flutter, Dart, Software Development</p>
                 <div class="social-links">
                     <a href="https://github.com/Mahmut0b" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/mahmutbasmaci/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
+        </div>
 
+        <div class="team-grid bottom-row">
             <div class="team-card">
-                <div class="avatar">AS</div>
+                <div class="avatar">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/salih.png" alt="Ahmed Salih">
+                </div>
                 <h4>Ahmed Salih</h4>
-                <p class="role">Full Stack Developer</p>
-                <p class="skills">Frontend, Backend Integration</p>
+                <p class="role" data-key="role_as">Full Stack Developer</p>
+                <p class="skills" data-key="skills_as">Frontend, Backend Integration</p>
                 <div class="social-links">
                     <a href="https://github.com/Ahmedsall1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/ahmed-salih11/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -732,10 +858,12 @@
             </div>
 
             <div class="team-card">
-                <div class="avatar">MR</div>
+                <div class="avatar">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/mutez.png" alt="Mutez Rahal">
+                </div>
                 <h4>Mutez Rahal</h4>
-                <p class="role">AI Engineer</p>
-                <p class="skills">Data Analysis, Machine Learning</p>
+                <p class="role" data-key="role_mr">AI Engineer</p>
+                <p class="skills" data-key="skills_mr">Data Analysis, Machine Learning</p>
                 <div class="social-links">
                     <a href="https://github.com/Mutez-Rahal" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/mutez-rahal/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -743,10 +871,12 @@
             </div>
 
             <div class="team-card">
-                <div class="avatar">MM</div>
+                <div class="avatar">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/maky.png" alt="Malik Muhammed">
+                </div>
                 <h4>Malik Muhammed</h4>
-                <p class="role">Full Stack Developer</p>
-                <p class="skills">Data Analysis, Business Intelligence</p>
+                <p class="role" data-key="role_mm">Full Stack Developer</p>
+                <p class="skills" data-key="skills_mm">Data Analysis, Business Intelligence</p>
                 <div class="social-links">
                     <a href="https://github.com/malikmaky" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/malik-muhammed/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -754,10 +884,12 @@
             </div>
 
             <div class="team-card">
-                <div class="avatar">B</div>
-                <h4>Bahaa</h4>
-                <p class="role">Backend Developer</p>
-                <p class="skills">APIs, Database Design, Security</p>
+                <div class="avatar">
+                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/bahaa.png" alt="Bahaa">
+                </div>
+                <h4>Bahaa Aldin Alzhouri</h4>
+                <p class="role" data-key="role_b">Backend Developer</p>
+                <p class="skills" data-key="skills_b">APIs, Database Design, Security</p>
                 <div class="social-links">
                     <a href="https://github.com/BhaaSyr" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/bahaa-aldin-alzhouri-80b994232/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -768,22 +900,199 @@
 
     <section class="contact" id="contact">
         <div class="contact-content">
-            <h2>Let's Work Together</h2>
-            <p>Looking for a professional team for your project? Contact us for innovation- and quality-focused solutions.</p>
+            <h2 data-key="contact_title">Let's Work Together</h2>
+            <p data-key="contact_subtitle">Looking for a professional team for your project? Contact us for innovation- and quality-focused solutions.</p>
             <div class="cta-buttons">
-                <a href="mailto:info.m3code@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> Send Email</a>
+                <a href="mailto:info.m3code@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> <span data-key="contact_email">Send Email</span></a>
                 <a href="https://www.linkedin.com/company/m3codes" class="btn btn-secondary" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>© 2024 M3Code. Built with <i class="fas fa-heart" style="color: #ec4899;"></i> by M3Code Team</p>
-        <p><em>"Innovating Today, Shaping Tomorrow"</em></p>
+        <p>© 2024 M3Code. <span data-key="footer_built">Built with</span> <i class="fas fa-heart" style="color: #ec4899;"></i> <span data-key="footer_by">by M3Code Team</span></p>
+        <p><em data-key="footer_motto">"Innovating Today, Shaping Tomorrow"</em></p>
     </footer>
 
     <script>
-        // Smooth scrolling
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_projects: "Projects",
+                nav_team: "Team",
+                nav_contact: "Contact",
+                hero_title: "Innovating Today, Shaping Tomorrow",
+                hero_subtitle: "A dynamic software team specialized in artificial intelligence, mobile app development, and web technologies.",
+                hero_cta1: "Explore Our Projects",
+                hero_cta2: "Contact Us",
+                stat_members: "Team Members",
+                stat_projects: "Completed Projects",
+                stat_ranking: "Teknofest Finalist",
+                stat_passion: "Passion & Innovation",
+                projects_title: "Our Projects",
+                project_hackathon: "AI-powered recommendation system developed for Teknofest Trendyol E-Commerce Hackathon. Top 10 finalist among 300+ teams with LLM-based personalized product predictions.",
+                project_formarch: "Multi-language corporate energy services platform with role-based interfaces, purchase processes, personalized discounts, and admin dashboard. Built with Laravel and modern web technologies.",
+                project_ud: "A compassionate mobile app that assists Alzheimer's patients and individuals with memory challenges.",
+                project_passtle: "A locally encrypted password manager with AES-256. Your privacy is our priority.",
+                project_oshara: "Smart expense-sharing platform for roommates. Fair calculations and a democratic reconciliation system.",
+                project_fotvia: "An AI-powered photo editing platform. Technology that revolutionizes image enhancement.",
+                project_ikra: "Book discovery and community platform. A comprehensive catalog that connects readers with their next favorites.",
+                project_hungerjet: "Next-gen delivery platform revolutionizing food ordering. Speed, quality, and satisfaction.",
+                team_title: "Our Team",
+                role_my: "Co-Founder | UI/UX Designer",
+                skills_my: "Mobile Development, User Experience",
+                role_mb: "Co-Founder | AI Specialist",
+                skills_mb: "Artificial Intelligence, Machine Learning",
+                role_m: "Co-Founder | Mobile Developer",
+                skills_m: "Flutter, Dart, Software Development",
+                role_as: "Full Stack Developer",
+                skills_as: "Frontend, Backend Integration",
+                role_mr: "AI Engineer",
+                skills_mr: "Data Analysis, Machine Learning",
+                role_mm: "Full Stack Developer",
+                skills_mm: "Data Analysis, Business Intelligence",
+                role_b: "Backend Developer",
+                skills_b: "APIs, Database Design, Security",
+                contact_title: "Let's Work Together",
+                contact_subtitle: "Looking for a professional team for your project? Contact us for innovation- and quality-focused solutions.",
+                contact_email: "Send Email",
+                footer_built: "Built with",
+                footer_by: "by M3Code Team",
+                footer_motto: '"Innovating Today, Shaping Tomorrow"'
+            },
+            tr: {
+                nav_home: "Ana Sayfa",
+                nav_projects: "Projeler",
+                nav_team: "Ekip",
+                nav_contact: "İletişim",
+                hero_title: "Bugünü Yeniliyoruz, Yarını Şekillendiriyoruz",
+                hero_subtitle: "Yapay zeka, mobil uygulama geliştirme ve web teknolojilerinde uzmanlaşmış dinamik bir yazılım ekibi.",
+                hero_cta1: "Projelerimizi Keşfedin",
+                hero_cta2: "Bize Ulaşın",
+                stat_members: "Ekip Üyesi",
+                stat_projects: "Tamamlanan Proje",
+                stat_ranking: "Teknofest Finalist",
+                stat_passion: "Tutku ve İnovasyon",
+                projects_title: "Projelerimiz",
+                project_hackathon: "Teknofest Trendyol E-Ticaret Hackathonu için geliştirilen yapay zeka destekli öneri sistemi. 300+ takım arasında ilk 10'a girerek LLM tabanlı kişiselleştirilmiş ürün tahminleri.",
+                project_formarch: "Rol tabanlı arayüzler, satın alma süreçleri, kişiselleştirilmiş indirimler ve yönetici panosu içeren çok dilli kurumsal enerji hizmetleri platformu. Laravel ve modern web teknolojileriyle geliştirildi.",
+                project_ud: "Alzheimer hastaları ve hafıza sorunları yaşayan bireylere yardımcı olan şefkatli bir mobil uygulama.",
+                project_passtle: "AES-256 ile yerel olarak şifrelenmiş şifre yöneticisi. Gizliliğiniz önceliğimizdir.",
+                project_oshara: "Ev arkadaşları için akıllı masraf paylaşım platformu. Adil hesaplamalar ve demokratik uzlaşma sistemi.",
+                project_fotvia: "Yapay zeka destekli fotoğraf düzenleme platformu. Görüntü iyileştirmeyi devrimleştiren teknoloji.",
+                project_ikra: "Kitap keşif ve topluluk platformu. Okuyucuları bir sonraki favorileriyle buluşturan kapsamlı katalog.",
+                project_hungerjet: "Yemek siparişini devrimleştiren yeni nesil teslimat platformu. Hız, kalite ve memnuniyet.",
+                team_title: "Ekibimiz",
+                role_my: "Kurucu Ortak | UI/UX Tasarımcı",
+                skills_my: "Mobil Geliştirme, Kullanıcı Deneyimi",
+                role_mb: "Kurucu Ortak | Yapay Zeka Uzmanı",
+                skills_mb: "Yapay Zeka, Makine Öğrenimi",
+                role_m: "Kurucu Ortak | Mobil Geliştirici",
+                skills_m: "Flutter, Dart, Yazılım Geliştirme",
+                role_as: "Full Stack Geliştirici",
+                skills_as: "Frontend, Backend Entegrasyonu",
+                role_mr: "Yapay Zeka Mühendisi",
+                skills_mr: "Veri Analizi, Makine Öğrenimi",
+                role_mm: "Full Stack Geliştirici",
+                skills_mm: "Veri Analizi, İş Zekası",
+                role_b: "Backend Geliştirici",
+                skills_b: "API'ler, Veritabanı Tasarımı, Güvenlik",
+                contact_title: "Birlikte Çalışalım",
+                contact_subtitle: "Projeniz için profesyonel bir ekip mi arıyorsunuz? İnovasyon ve kalite odaklı çözümler için bizimle iletişime geçin.",
+                contact_email: "E-posta Gönder",
+                footer_built: "ile yapıldı",
+                footer_by: "M3Code Ekibi tarafından",
+                footer_motto: '"Bugünü Yeniliyoruz, Yarını Şekillendiriyoruz"'
+            },
+            ar: {
+                nav_home: "الرئيسية",
+                nav_projects: "المشاريع",
+                nav_team: "الفريق",
+                nav_contact: "اتصل بنا",
+                hero_title: "نبتكر اليوم، نشكل الغد",
+                hero_subtitle: "فريق برمجيات ديناميكي متخصص في الذكاء الاصطناعي وتطوير تطبيقات الهاتف المحمول وتقنيات الويب.",
+                hero_cta1: "استكشف مشاريعنا",
+                hero_cta2: "اتصل بنا",
+                stat_members: "أعضاء الفريق",
+                stat_projects: "المشاريع المكتملة",
+                stat_ranking: "متأهل لـ Teknofest",
+                stat_passion: "الشغف والابتكار",
+                projects_title: "مشاريعنا",
+                project_hackathon: "نظام توصيات مدعوم بالذكاء الاصطناعي تم تطويره لهاكاثون Teknofest Trendyol للتجارة الإلكترونية. متأهل ضمن أفضل 10 فرق من بين أكثر من 300 فريق مع توقعات منتجات مخصصة قائمة على LLM.",
+                project_formarch: "منصة خدمات طاقة مؤسسية متعددة اللغات مع واجهات قائمة على الأدوار وعمليات شراء وخصومات مخصصة ولوحة تحكم إدارية. تم بناؤها باستخدام Laravel وتقنيات الويب الحديثة.",
+                project_ud: "تطبيق هاتف محمول عطوف يساعد مرضى الزهايمر والأفراد الذين يعانون من تحديات الذاكرة.",
+                project_passtle: "مدير كلمات مرور مشفر محلياً بتقنية AES-256. خصوصيتك هي أولويتنا.",
+                project_oshara: "منصة ذكية لمشاركة النفقات بين زملاء السكن. حسابات عادلة ونظام تسوية ديمقراطي.",
+                project_fotvia: "منصة تحرير صور مدعومة بالذكاء الاصطناعي. تقنية تُحدث ثورة في تحسين الصور.",
+                project_ikra: "منصة اكتشاف الكتب والمجتمع. كتالوج شامل يربط القراء بكتبهم المفضلة التالية.",
+                project_hungerjet: "منصة توصيل من الجيل التالي تُحدث ثورة في طلب الطعام. السرعة والجودة والرضا.",
+                team_title: "فريقنا",
+                role_my: "شريك مؤسس | مصمم UI/UX",
+                skills_my: "تطوير الهاتف المحمول، تجربة المستخدم",
+                role_mb: "شريك مؤسس | أخصائي الذكاء الاصطناعي",
+                skills_mb: "الذكاء الاصطناعي، التعلم الآلي",
+                role_m: "شريك مؤسس | مطور هاتف محمول",
+                skills_m: "Flutter، Dart، تطوير البرمجيات",
+                role_as: "مطور Full Stack",
+                skills_as: "Frontend، تكامل Backend",
+                role_mr: "مهندس ذكاء اصطناعي",
+                skills_mr: "تحليل البيانات، التعلم الآلي",
+                role_mm: "مطور Full Stack",
+                skills_mm: "تحليل البيانات، ذكاء الأعمال",
+                role_b: "مطور Backend",
+                skills_b: "واجهات برمجة التطبيقات، تصميم قواعد البيانات، الأمان",
+                contact_title: "لنعمل معاً",
+                contact_subtitle: "هل تبحث عن فريق محترف لمشروعك؟ اتصل بنا للحصول على حلول تركز على الابتكار والجودة.",
+                contact_email: "إرسال بريد إلكتروني",
+                footer_built: "صُنع بـ",
+                footer_by: "بواسطة فريق M3Code",
+                footer_motto: '"نبتكر اليوم، نشكل الغد"'
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLangDropdown() {
+            const dropdown = document.getElementById('lang-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLang(lang) {
+            currentLang = lang;
+            document.getElementById('current-lang').textContent = lang.toUpperCase();
+            
+            const options = document.querySelectorAll('.lang-option');
+            options.forEach(opt => opt.classList.remove('active'));
+            event.target.closest('.lang-option').classList.add('active');
+            
+            updateContent(lang);
+            toggleLangDropdown();
+            
+            if (lang === 'ar') {
+                document.body.style.direction = 'rtl';
+            } else {
+                document.body.style.direction = 'ltr';
+            }
+        }
+
+        function updateContent(lang) {
+            const elements = document.querySelectorAll('[data-key]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('lang-dropdown');
+            const langBtn = document.querySelector('.lang-btn');
+            if (!dropdown.contains(e.target) && !langBtn.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -797,7 +1106,6 @@
             });
         });
 
-        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -819,19 +1127,17 @@
             observer.observe(el);
         });
 
-        // Navbar background on scroll
         const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
                 nav.style.background = 'rgba(255, 255, 255, 0.98)';
                 nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
             } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.9)';
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
                 nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
             }
         });
 
-        // Mobile menu toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
 
@@ -850,17 +1156,16 @@
             }
         });
 
-        // Counter animation for stats
         const animateCounter = (element, target) => {
             let current = 0;
             const increment = target / 50;
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
-                    element.textContent = target + (element.textContent.includes('th') ? 'th' : element.textContent.includes('%') ? '%' : '+');
+                    element.innerHTML = element.innerHTML.replace(/\d+/, target);
                     clearInterval(timer);
                 } else {
-                    element.textContent = Math.floor(current) + (element.textContent.includes('th') ? 'th' : element.textContent.includes('%') ? '%' : '+');
+                    element.innerHTML = element.innerHTML.replace(/\d+/, Math.floor(current));
                 }
             }, 30);
         };
@@ -869,8 +1174,10 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const h3 = entry.target.querySelector('h3');
-                    const targetValue = parseInt(h3.textContent);
-                    if (!isNaN(targetValue)) {
+                    const text = h3.textContent;
+                    const match = text.match(/\d+/);
+                    if (match) {
+                        const targetValue = parseInt(match[0]);
                         animateCounter(h3, targetValue);
                     }
                     statsObserver.unobserve(entry.target);
