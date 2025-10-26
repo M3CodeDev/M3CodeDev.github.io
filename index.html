@@ -1,1193 +1,1483 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>M3Code</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --primary: #6366f1;
-            --secondary: #8b5cf6;
-            --accent: #ec4899;
-            --dark: #1e293b;
-            --darker: #0f172a;
-            --light: #ffffff;
-            --bg-light: #f8fafc;
-            --gray: #64748b;
-            --text-dark: #0f172a;
-        }
+      :root {
+        --primary: #6366f1;
+        --secondary: #8b5cf6;
+        --accent: #ec4899;
+        --dark: #1e293b;
+        --darker: #0f172a;
+        --light: #ffffff;
+        --bg-light: #f8fafc;
+        --gray: #64748b;
+        --text-dark: #0f172a;
+      }
 
-        body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--light);
-            color: var(--text-dark);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+      body {
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background: var(--light);
+        color: var(--text-dark);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
 
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-        }
+      .bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      }
 
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-        }
+      .bg-animation::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.08) 1px,
+          transparent 1px
+        );
+        background-size: 50px 50px;
+        animation: gridMove 20s linear infinite;
+      }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+      @keyframes gridMove {
+        0% {
+          transform: translate(0, 0);
         }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        100% {
+          transform: translate(50px, 50px);
         }
+      }
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 50px;
+        object-fit: contain;
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-dark);
+        text-decoration: none;
+        transition: color 0.3s;
+        position: relative;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.3s;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .language-switcher {
+        position: relative;
+      }
+
+      .lang-btn {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: white;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+      }
+
+      .lang-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+      }
+
+      .lang-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 0.5rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        padding: 0.5rem;
+        display: none;
+        min-width: 150px;
+      }
+
+      .lang-dropdown.active {
+        display: block;
+        animation: fadeInDown 0.3s ease;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-        .logo img {
-            height: 50px;
-            object-fit: contain;
+      .lang-option {
+        padding: 0.7rem 1rem;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+      }
+
+      .lang-option:hover {
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--primary);
+      }
+
+      .lang-option.active {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: white;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6rem 2rem 2rem;
+        position: relative;
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        text-align: center;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: fadeInUp 1s ease;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+
+      .hero p {
+        font-size: clamp(1.1rem, 2vw, 1.5rem);
+        color: var(--gray);
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.2s backwards;
+        font-weight: 400;
+        line-height: 1.7;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease 0.4s backwards;
+      }
+
+      .btn {
+        padding: 1rem 2.5rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: white;
+        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+      }
+
+      .btn-secondary:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
         }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+      .stats {
+        padding: 4rem 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.05),
+          rgba(236, 72, 153, 0.05)
+        );
+        border-top: 1px solid rgba(99, 102, 241, 0.1);
+        border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+      }
 
-        .nav-links a {
-            color: var(--text-dark);
-            text-decoration: none;
-            transition: color 0.3s;
-            position: relative;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+      .stats-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 3rem;
+        text-align: center;
+      }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
+      .stat-item h3 {
+        font-size: 3rem;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+        font-weight: 800;
+        font-family: "JetBrains Mono", monospace;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+      .stat-item h3 i {
+        font-size: 2rem;
+      }
 
-        .language-switcher {
-            position: relative;
-        }
+      .stat-item p {
+        color: var(--gray);
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
 
-        .lang-btn {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-        }
+      .section {
+        padding: 6rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
 
-        .lang-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-        }
+      .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        text-align: center;
+        margin-bottom: 3rem;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
 
-        .lang-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 0.5rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            padding: 0.5rem;
-            display: none;
-            min-width: 150px;
-        }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
 
-        .lang-dropdown.active {
-            display: block;
-            animation: fadeInDown 0.3s ease;
-        }
+      .project-card {
+        background: white;
+        border: 1px solid rgba(99, 102, 241, 0.15);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.3s;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      .project-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary);
+        box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+      }
 
-        .lang-option {
-            padding: 0.7rem 1rem;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 500;
-        }
+      .project-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
 
-        .lang-option:hover {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-        }
+      .project-icon {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        border-radius: 12px;
+      }
 
-        .lang-option.active {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-        }
+      .project-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+        font-weight: 700;
+      }
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 2rem 2rem;
-            position: relative;
-        }
+      .project-card p {
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+      }
 
-        .hero-content {
-            max-width: 1200px;
-            text-align: center;
-            z-index: 1;
-        }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s ease;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
+      .tag {
+        padding: 0.4rem 1rem;
+        background: rgba(99, 102, 241, 0.1);
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: var(--primary);
+        font-weight: 500;
+        font-family: "JetBrains Mono", monospace;
+      }
 
-        .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
-            color: var(--gray);
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s backwards;
-            font-weight: 400;
-            line-height: 1.7;
-        }
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.4s backwards;
-        }
+      .team-grid.bottom-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
 
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Poppins', sans-serif;
-        }
+      .team-card {
+        background: white;
+        border: 1px solid rgba(99, 102, 241, 0.15);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-        }
+      .team-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary);
+        box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+      }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
-        }
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        overflow: hidden;
+        border: 4px solid transparent;
+        background: linear-gradient(white, white) padding-box,
+          linear-gradient(135deg, var(--primary), var(--accent)) border-box;
+      }
 
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-        }
+      .team-card h4 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-dark);
+        font-weight: 700;
+      }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      .team-card .role {
+        color: var(--primary);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
 
-        .stats {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
-            border-top: 1px solid rgba(99, 102, 241, 0.1);
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-        }
+      .team-card .skills {
+        color: var(--gray);
+        font-size: 0.9rem;
+        font-weight: 400;
+      }
 
-        .stats-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            text-align: center;
-        }
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
 
-        .stat-item h3 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
-            font-family: 'JetBrains Mono', monospace;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
+      .social-links a {
+        color: var(--gray);
+        font-size: 1.3rem;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(99, 102, 241, 0.1);
+      }
 
-        .stat-item h3 i {
-            font-size: 2rem;
-        }
+      .social-links a:hover {
+        color: white;
+        background: var(--primary);
+        transform: translateY(-3px);
+      }
 
-        .stat-item p {
-            color: var(--gray);
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
+      .contact {
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.05),
+          rgba(236, 72, 153, 0.05)
+        );
+        padding: 6rem 2rem;
+        text-align: center;
+      }
 
-        .section {
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+      .contact-content {
+        max-width: 600px;
+        margin: 0 auto;
+      }
 
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
+      .contact h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
+      .contact p {
+        color: var(--gray);
+        margin-bottom: 2rem;
+        font-weight: 400;
+        line-height: 1.7;
+      }
 
-        .project-card {
-            background: white;
-            border: 1px solid rgba(99, 102, 241, 0.15);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
+      footer {
+        padding: 2rem;
+        text-align: center;
+        border-top: 1px solid rgba(99, 102, 241, 0.1);
+        color: var(--gray);
+        background: white;
+        font-size: 0.9rem;
+      }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
-        }
+      footer em {
+        font-family: "JetBrains Mono", monospace;
+        font-style: normal;
+        font-weight: 500;
+      }
 
-        .project-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text-dark);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
 
-        .project-icon {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            border-radius: 12px;
-        }
-
-        .project-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-            font-weight: 700;
-        }
-
-        .project-card p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            padding: 0.4rem 1rem;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--primary);
-            font-weight: 500;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
+      @media (max-width: 1024px) {
         .team-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
+          grid-template-columns: repeat(2, 1fr);
         }
 
         .team-grid.bottom-row {
-            grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(2, 1fr);
         }
+      }
 
-        .team-card {
-            background: white;
-            border: 1px solid rgba(99, 102, 241, 0.15);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .team-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
-        }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            overflow: hidden;
-            border: 4px solid transparent;
-            background: linear-gradient(white, white) padding-box,
-                        linear-gradient(135deg, var(--primary), var(--accent)) border-box;
-        }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .team-card h4 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-            font-weight: 700;
-        }
-
-        .team-card .role {
-            color: var(--primary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .team-card .skills {
-            color: var(--gray);
-            font-size: 0.9rem;
-            font-weight: 400;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: var(--gray);
-            font-size: 1.3rem;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(99, 102, 241, 0.1);
-        }
-
-        .social-links a:hover {
-            color: white;
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .contact {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
-
-        .contact p {
-            color: var(--gray);
-            margin-bottom: 2rem;
-            font-weight: 400;
-            line-height: 1.7;
-        }
-
-        footer {
-            padding: 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(99, 102, 241, 0.1);
-            color: var(--gray);
-            background: white;
-            font-size: 0.9rem;
-        }
-
-        footer em {
-            font-family: 'JetBrains Mono', monospace;
-            font-style: normal;
-            font-weight: 500;
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
         }
 
         .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-dark);
-            font-size: 1.5rem;
-            cursor: pointer;
+          display: block;
         }
 
-        @media (max-width: 1024px) {
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .team-grid.bottom-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .projects-grid {
+          grid-template-columns: 1fr;
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .team-grid,
-            .team-grid.bottom-row {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
+        .team-grid,
+        .team-grid.bottom-row {
+          grid-template-columns: 1fr;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
+        .cta-buttons {
+          flex-direction: column;
         }
+      }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
+      .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+      }
 
-        .scroll-indicator::before {
-            content: '↓';
-            font-size: 2rem;
-            color: var(--primary);
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0);
         }
+        40% {
+          transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+      }
+
+      .scroll-indicator::before {
+        content: "↓";
+        font-size: 2rem;
+        color: var(--primary);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="bg-animation"></div>
 
     <nav>
-        <div class="nav-container">
-            <div class="logo">
-                <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/M3CodeLogo.png" alt="M3Code Logo">
-            </div>
-            <div class="nav-right">
-                <ul class="nav-links">
-                    <li><a href="#home"><i class="fas fa-home"></i> <span data-key="nav_home">Home</span></a></li>
-                    <li><a href="#projects"><i class="fas fa-folder-open"></i> <span data-key="nav_projects">Projects</span></a></li>
-                    <li><a href="#team"><i class="fas fa-users"></i> <span data-key="nav_team">Team</span></a></li>
-                    <li><a href="#contact"><i class="fas fa-envelope"></i> <span data-key="nav_contact">Contact</span></a></li>
-                </ul>
-                <div class="language-switcher">
-                    <button class="lang-btn" onclick="toggleLangDropdown()">
-                        <i class="fas fa-globe"></i>
-                        <span id="current-lang">EN</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="lang-dropdown" id="lang-dropdown">
-                        <div class="lang-option active" onclick="changeLang('en')">
-                            🇬🇧 English
-                        </div>
-                        <div class="lang-option" onclick="changeLang('tr')">
-                            🇹🇷 Türkçe
-                        </div>
-                        <div class="lang-option" onclick="changeLang('ar')">
-                            🇸🇦 العربية
-                        </div>
-                    </div>
-                </div>
-                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-            </div>
+      <div class="nav-container">
+        <div class="logo">
+          <img
+            src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/M3CodeLogo.png"
+            alt="M3Code Logo"
+          />
         </div>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li>
+              <a href="#home"
+                ><i class="fas fa-home"></i>
+                <span data-key="nav_home">Home</span></a
+              >
+            </li>
+            <li>
+              <a href="#projects"
+                ><i class="fas fa-folder-open"></i>
+                <span data-key="nav_projects">Projects</span></a
+              >
+            </li>
+            <li>
+              <a href="#team"
+                ><i class="fas fa-users"></i>
+                <span data-key="nav_team">Team</span></a
+              >
+            </li>
+            <li>
+              <a href="#contact"
+                ><i class="fas fa-envelope"></i>
+                <span data-key="nav_contact">Contact</span></a
+              >
+            </li>
+          </ul>
+          <div class="language-switcher">
+            <button class="lang-btn" onclick="toggleLangDropdown()">
+              <i class="fas fa-globe"></i>
+              <span id="current-lang">EN</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="lang-dropdown" id="lang-dropdown">
+              <div class="lang-option active" onclick="changeLang('en')">
+                🇬🇧 English
+              </div>
+              <div class="lang-option" onclick="changeLang('tr')">
+                🇹🇷 Türkçe
+              </div>
+              <div class="lang-option" onclick="changeLang('ar')">
+                🇸🇦 العربية
+              </div>
+            </div>
+          </div>
+          <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+      </div>
     </nav>
 
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1 data-key="hero_title">Innovating Today, Shaping Tomorrow</h1>
-            <p data-key="hero_subtitle">A dynamic software team specialized in artificial intelligence, mobile app development, and web technologies.</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> <span data-key="hero_cta1">Explore Our Projects</span></a>
-                <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> <span data-key="hero_cta2">Contact Us</span></a>
-            </div>
+      <div class="hero-content">
+        <h1 data-key="hero_title">Innovating Today, Shaping Tomorrow</h1>
+        <p data-key="hero_subtitle">
+          A dynamic software team specialized in artificial intelligence, mobile
+          app development, and web technologies.
+        </p>
+        <div class="cta-buttons">
+          <a href="#projects" class="btn btn-primary"
+            ><i class="fas fa-rocket"></i>
+            <span data-key="hero_cta1">Explore Our Projects</span></a
+          >
+          <a href="#contact" class="btn btn-secondary"
+            ><i class="fas fa-paper-plane"></i>
+            <span data-key="hero_cta2">Contact Us</span></a
+          >
         </div>
-        <div class="scroll-indicator"></div>
+      </div>
+      <div class="scroll-indicator"></div>
     </section>
 
     <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <h3><i class="fas fa-users"></i> 7+</h3>
-                <p data-key="stat_members">Team Members</p>
-            </div>
-            <div class="stat-item">
-                <h3><i class="fas fa-rocket"></i> 11+</h3>
-                <p data-key="stat_projects">Completed Projects</p>
-            </div>
-            <div class="stat-item">
-                <h3><i class="fas fa-trophy"></i> Top 7</h3>
-                <p data-key="stat_ranking">Teknofest Trendyol Hackathon Finalist</p>
-            </div>
-            <div class="stat-item">
-                <h3><i class="fas fa-fire"></i> 100%</h3>
-                <p data-key="stat_passion">Passion & Innovation</p>
-            </div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3><i class="fas fa-users"></i> 7+</h3>
+          <p data-key="stat_members">Team Members</p>
         </div>
+        <div class="stat-item">
+          <h3><i class="fas fa-rocket"></i> 11+</h3>
+          <p data-key="stat_projects">Completed Projects</p>
+        </div>
+        <div class="stat-item">
+          <h3><i class="fas fa-trophy"></i> Top 7</h3>
+          <p data-key="stat_ranking">Teknofest Trendyol Hackathon Finalist</p>
+        </div>
+        <div class="stat-item">
+          <h3><i class="fas fa-fire"></i> 100%</h3>
+          <p data-key="stat_passion">Passion & Innovation</p>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="projects">
-        <h2 class="section-title" data-key="projects_title">Our Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-header">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/hackathon.png" alt="Teknofest Hackathon" class="project-icon">
-                    <h3>Trendyol AI Hackathon</h3>
-                </div>
-                <p data-key="project_hackathon">AI-powered recommendation system developed for Teknofest Trendyol E-Commerce Hackathon. Top 10 finalist among 300+ teams with LLM-based personalized product predictions.</p>
-                <div class="tags">
-                    <span class="tag">AI/ML</span>
-                    <span class="tag">LLM</span>
-                    <span class="tag">UI/UX</span>
-                    <span class="tag">Finalist</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/formarch.png" alt="Formarch Energy" class="project-icon">
-                    <h3>Formarch Energy</h3>
-                </div>
-                <p data-key="project_formarch">Multi-language corporate energy services platform with role-based interfaces, purchase processes, personalized discounts, and admin dashboard. Built with Laravel and modern web technologies.</p>
-                <div class="tags">
-                    <span class="tag">Laravel</span>
-                    <span class="tag">Tailwind</span> 
-                    <span class="tag">Enterprise</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/udlogo.png" alt="Forgetful Friend" class="project-icon">
-                    <h3>Unutma Dostu</h3>
-                </div>
-                <p data-key="project_ud">A compassionate mobile app that assists Alzheimer's patients and individuals with memory challenges.</p>
-                <div class="tags">
-                    <span class="tag">Flutter</span>
-                    <span class="tag">Firebase</span>
-                    <span class="tag">Healthcare</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/PasstleLogo.png" alt="Passtle" class="project-icon">
-                    <h3>Passtle</h3>
-                </div>
-                <p data-key="project_passtle">A locally encrypted password manager with AES-256. Your privacy is our priority.</p>
-                <div class="tags">
-                    <span class="tag">Security</span>
-                    <span class="tag">Encryption</span>
-                    <span class="tag">Flutter</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/OsharaLogo.png" alt="Oshara" class="project-icon">
-                    <h3>Oshara</h3>
-                </div>
-                <p data-key="project_oshara">Smart expense-sharing platform for roommates. Fair calculations and a democratic reconciliation system.</p>
-                <div class="tags">
-                    <span class="tag">Firebase</span>
-                    <span class="tag">Real-time</span>
-                    <span class="tag">Riverpod</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/FotviaLogo2.jpg" alt="Fotvia" class="project-icon">
-                    <h3>Fotvia</h3>
-                </div>
-                <p data-key="project_fotvia">An AI-powered photo editing platform. Technology that revolutionizes image enhancement.</p>
-                <div class="tags">
-                    <span class="tag">AI/ML</span>
-                    <span class="tag">Computer Vision</span>
-                    <span class="tag">Active</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/ikaricon.png" alt="Ikra" class="project-icon">
-                    <h3>Ikra</h3>
-                </div>
-                <p data-key="project_ikra">Book discovery and community platform. A comprehensive catalog that connects readers with their next favorites.</p>
-                <div class="tags">
-                    <span class="tag">Social</span>
-                    <span class="tag">Recommendations</span>
-                    <span class="tag">Active</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/appicon.png" alt="HungerJet" class="project-icon">
-                    <h3>HungerJet</h3>
-                </div>
-                <p data-key="project_hungerjet">Next-gen delivery platform revolutionizing food ordering. Speed, quality, and satisfaction.</p>
-                <div class="tags">
-                    <span class="tag">E-commerce</span>
-                    <span class="tag">Real-time Tracking</span>
-                    <span class="tag">Coming Soon</span>
-                </div>
-            </div>
+      <h2 class="section-title" data-key="projects_title">Our Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/hackathon.png"
+              alt="Teknofest Hackathon"
+              class="project-icon"
+            />
+            <h3>Trendyol AI Hackathon</h3>
+          </div>
+          <p data-key="project_hackathon">
+            AI-powered recommendation system developed for Teknofest Trendyol
+            E-Commerce Hackathon. Top 10 finalist among 300+ teams with
+            LLM-based personalized product predictions.
+          </p>
+          <div class="tags">
+            <span class="tag">AI/ML</span>
+            <span class="tag">LLM</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">Finalist</span>
+          </div>
         </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/formarch.png"
+              alt="Formarch Energy"
+              class="project-icon"
+            />
+            <h3>Formarch Energy</h3>
+          </div>
+          <p data-key="project_formarch">
+            Multi-language corporate energy services platform with role-based
+            interfaces, purchase processes, personalized discounts, and admin
+            dashboard. Built with Laravel and modern web technologies.
+          </p>
+          <div class="tags">
+            <span class="tag">Laravel</span>
+            <span class="tag">Tailwind</span>
+            <span class="tag">Enterprise</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/udlogo.png"
+              alt="Forgetful Friend"
+              class="project-icon"
+            />
+            <h3>Unutma Dostu</h3>
+          </div>
+          <p data-key="project_ud">
+            A compassionate mobile app that assists Alzheimer's patients and
+            individuals with memory challenges.
+          </p>
+          <div class="tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">Healthcare</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/PasstleLogo.png"
+              alt="Passtle"
+              class="project-icon"
+            />
+            <h3>Passtle</h3>
+          </div>
+          <p data-key="project_passtle">
+            A locally encrypted password manager with AES-256. Your privacy is
+            our priority.
+          </p>
+          <div class="tags">
+            <span class="tag">Security</span>
+            <span class="tag">Encryption</span>
+            <span class="tag">Flutter</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/OsharaLogo.png"
+              alt="Oshara"
+              class="project-icon"
+            />
+            <h3>Oshara</h3>
+          </div>
+          <p data-key="project_oshara">
+            Smart expense-sharing platform for roommates. Fair calculations and
+            a democratic reconciliation system.
+          </p>
+          <div class="tags">
+            <span class="tag">Firebase</span>
+            <span class="tag">Real-time</span>
+            <span class="tag">Riverpod</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/FotviaLogo2.jpg"
+              alt="Fotvia"
+              class="project-icon"
+            />
+            <h3>Fotvia</h3>
+          </div>
+          <p data-key="project_fotvia">
+            An AI-powered photo editing platform. Technology that revolutionizes
+            image enhancement.
+          </p>
+          <div class="tags">
+            <span class="tag">AI/ML</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Active</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/ikaricon.png"
+              alt="Ikra"
+              class="project-icon"
+            />
+            <h3>Ikra</h3>
+          </div>
+          <p data-key="project_ikra">
+            Book discovery and community platform. A comprehensive catalog that
+            connects readers with their next favorites.
+          </p>
+          <div class="tags">
+            <span class="tag">Social</span>
+            <span class="tag">Recommendations</span>
+            <span class="tag">Active</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/appicon.png"
+              alt="HungerJet"
+              class="project-icon"
+            />
+            <h3>HungerJet</h3>
+          </div>
+          <p data-key="project_hungerjet">
+            Next-gen delivery platform revolutionizing food ordering. Speed,
+            quality, and satisfaction.
+          </p>
+          <div class="tags">
+            <span class="tag">E-commerce</span>
+            <span class="tag">Real-time Tracking</span>
+            <span class="tag">Coming Soon</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="team">
-        <h2 class="section-title" data-key="team_title">Our Team</h2>
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="avatar">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/mxy.png" alt="Muhammed Yusufoglu">
-                </div>
-                <h4>Muhammed Yusufoglu</h4>
-                <p class="role" data-key="role_my">Co-Founder | UI/UX Designer</p>
-                <p class="skills" data-key="skills_my">Mobile Development, User Experience</p>
-                <div class="social-links">
-                    <a href="https://github.com/mxy963" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/mxy963/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="avatar">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/bereket.png" alt="Muhammed Bereket">
-                </div>
-                <h4>Muhammed Bereket</h4>
-                <p class="role" data-key="role_mb">Co-Founder | AI Specialist</p>
-                <p class="skills" data-key="skills_mb">Artificial Intelligence, Machine Learning</p>
-                <div class="social-links">
-                    <a href="https://github.com/MuBereket" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/muhammed-bereket-526390307" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="avatar">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/mahmut.png" alt="Mahmoud Basmaci">
-                </div>
-                <h4>Mahmut Basmacı</h4>
-                <p class="role" data-key="role_m">Co-Founder | Mobile Developer</p>
-                <p class="skills" data-key="skills_m">Flutter, Dart, Software Development</p>
-                <div class="social-links">
-                    <a href="https://github.com/Mahmut0b" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/mahmutbasmaci/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
+      <h2 class="section-title" data-key="team_title">Our Team</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="avatar">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/mxy.png"
+              alt="Muhammed Yusufoglu"
+            />
+          </div>
+          <h4>Muhammed Yusufoglu</h4>
+          <p class="role" data-key="role_my">Co-Founder | UI/UX Designer</p>
+          <p class="skills" data-key="skills_my">
+            Mobile Development, User Experience
+          </p>
+          <div class="social-links">
+            <a href="https://github.com/mxy963" target="_blank" title="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/mxy963/"
+              target="_blank"
+              title="LinkedIn"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
         </div>
 
-        <div class="team-grid bottom-row">
-            <div class="team-card">
-                <div class="avatar">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/salih.png" alt="Ahmed Salih">
-                </div>
-                <h4>Ahmed Salih</h4>
-                <p class="role" data-key="role_as">Full Stack Developer</p>
-                <p class="skills" data-key="skills_as">Frontend, Backend Integration</p>
-                <div class="social-links">
-                    <a href="https://github.com/Ahmedsall1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/ahmed-salih11/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="avatar">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/mutez.png" alt="Mutez Rahal">
-                </div>
-                <h4>Mutez Rahal</h4>
-                <p class="role" data-key="role_mr">AI Engineer</p>
-                <p class="skills" data-key="skills_mr">Data Analysis, Machine Learning</p>
-                <div class="social-links">
-                    <a href="https://github.com/Mutez-Rahal" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/mutez-rahal/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="avatar">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/maky.png" alt="Malik Muhammed">
-                </div>
-                <h4>Malik Muhammed</h4>
-                <p class="role" data-key="role_mm">Full Stack Developer</p>
-                <p class="skills" data-key="skills_mm">Data Analysis, Business Intelligence</p>
-                <div class="social-links">
-                    <a href="https://github.com/malikmaky" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/malik-muhammed/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="avatar">
-                    <img src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/bahaa.png" alt="Bahaa">
-                </div>
-                <h4>Bahaa Aldin Alzhouri</h4>
-                <p class="role" data-key="role_b">Backend Developer</p>
-                <p class="skills" data-key="skills_b">APIs, Database Design, Security</p>
-                <div class="social-links">
-                    <a href="https://github.com/BhaaSyr" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/bahaa-aldin-alzhouri-80b994232/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
+        <div class="team-card">
+          <div class="avatar">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/bereket.png"
+              alt="Muhammed Bereket"
+            />
+          </div>
+          <h4>Muhammed Bereket</h4>
+          <p class="role" data-key="role_mb">Co-Founder | AI Specialist</p>
+          <p class="skills" data-key="skills_mb">
+            Artificial Intelligence, Machine Learning
+          </p>
+          <div class="social-links">
+            <a
+              href="https://github.com/MuBereket"
+              target="_blank"
+              title="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/muhammed-bereket-526390307"
+              target="_blank"
+              title="LinkedIn"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
         </div>
+
+        <div class="team-card">
+          <div class="avatar">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/mahmut.png"
+              alt="Mahmoud Basmaci"
+            />
+          </div>
+          <h4>Mahmut Basmacı</h4>
+          <p class="role" data-key="role_m">Co-Founder | Mobile Developer</p>
+          <p class="skills" data-key="skills_m">
+            Flutter, Dart, Software Development
+          </p>
+          <div class="social-links">
+            <a href="https://github.com/Mahmut0b" target="_blank" title="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/mahmutbasmaci/"
+              target="_blank"
+              title="LinkedIn"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-grid bottom-row">
+        <div class="team-card">
+          <div class="avatar">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/salih.png"
+              alt="Ahmed Salih"
+            />
+          </div>
+          <h4>Ahmed Salih</h4>
+          <p class="role" data-key="role_as">Full Stack Developer</p>
+          <p class="skills" data-key="skills_as">
+            Frontend, Backend Integration
+          </p>
+          <div class="social-links">
+            <a
+              href="https://github.com/Ahmedsall1"
+              target="_blank"
+              title="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/ahmed-salih11/"
+              target="_blank"
+              title="LinkedIn"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="avatar">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/mutez.png"
+              alt="Mutez Rahal"
+            />
+          </div>
+          <h4>Mutez Rahal</h4>
+          <p class="role" data-key="role_mr">AI Engineer</p>
+          <p class="skills" data-key="skills_mr">
+            Data Analysis, Machine Learning
+          </p>
+          <div class="social-links">
+            <a
+              href="https://github.com/Mutez-Rahal"
+              target="_blank"
+              title="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/mutez-rahal/"
+              target="_blank"
+              title="LinkedIn"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="avatar">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/maky.png"
+              alt="Malik Muhammed"
+            />
+          </div>
+          <h4>Malik Muhammed</h4>
+          <p class="role" data-key="role_mm">Full Stack Developer</p>
+          <p class="skills" data-key="skills_mm">
+            Data Analysis, Business Intelligence
+          </p>
+          <div class="social-links">
+            <a
+              href="https://github.com/malikmaky"
+              target="_blank"
+              title="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/malik-muhammed/"
+              target="_blank"
+              title="LinkedIn"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="avatar">
+            <img
+              src="https://raw.githubusercontent.com/M3CodeDev/.github/main/profile/Logos/bahaa.png"
+              alt="Bahaa"
+            />
+          </div>
+          <h4>Bahaa Aldin Alzhouri</h4>
+          <p class="role" data-key="role_b">Backend Developer</p>
+          <p class="skills" data-key="skills_b">
+            APIs, Database Design, Security
+          </p>
+          <div class="social-links">
+            <a href="https://github.com/BhaaSyr" target="_blank" title="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/bahaa-aldin-alzhouri-80b994232/"
+              target="_blank"
+              title="LinkedIn"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="contact" id="contact">
-        <div class="contact-content">
-            <h2 data-key="contact_title">Let's Work Together</h2>
-            <p data-key="contact_subtitle">Looking for a professional team for your project? Contact us for innovation- and quality-focused solutions.</p>
-            <div class="cta-buttons">
-                <a href="mailto:info.m3code@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> <span data-key="contact_email">Send Email</span></a>
-                <a href="https://www.linkedin.com/company/m3codes" class="btn btn-secondary" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            </div>
+      <div class="contact-content">
+        <h2 data-key="contact_title">Let's Work Together</h2>
+        <p data-key="contact_subtitle">
+          Looking for a professional team for your project? Contact us for
+          innovation- and quality-focused solutions.
+        </p>
+        <div class="cta-buttons">
+          <a href="mailto:info.m3code@gmail.com" class="btn btn-primary"
+            ><i class="fas fa-envelope"></i>
+            <span data-key="contact_email">Send Email</span></a
+          >
+          <a
+            href="https://www.linkedin.com/company/m3codes"
+            class="btn btn-secondary"
+            target="_blank"
+            ><i class="fab fa-linkedin"></i> LinkedIn</a
+          >
         </div>
+      </div>
     </section>
 
     <footer>
-        <p>© 2024 M3Code. <span data-key="footer_built">Built with</span> <i class="fas fa-heart" style="color: #ec4899;"></i> <span data-key="footer_by">by M3Code Team</span></p>
-        <p><em data-key="footer_motto">"Innovating Today, Shaping Tomorrow"</em></p>
+      <p>
+        <a
+          href="https://github.com/M3CodeDev"
+          target="_blank"
+          style="
+            text-decoration: none;
+            color: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+          "
+        >
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+            alt="GitHub"
+            width="22"
+            height="22"
+            style="vertical-align: middle"
+          />
+          <em data-key="footer_motto">Our GitHub</em>
+        </a>
+      </p>
+
+      <p>
+        © 2025 M3Code. <span data-key="footer_built">Built with</span>
+        <i class="fas fa-heart" style="color: #ec4899"></i>
+        <span data-key="footer_by">by M3Code Team</span>
+      </p>
     </footer>
 
     <script>
-        const translations = {
-            en: {
-                nav_home: "Home",
-                nav_projects: "Projects",
-                nav_team: "Team",
-                nav_contact: "Contact",
-                hero_title: "Innovating Today, Shaping Tomorrow",
-                hero_subtitle: "A dynamic software team specialized in artificial intelligence, mobile app development, and web technologies.",
-                hero_cta1: "Explore Our Projects",
-                hero_cta2: "Contact Us",
-                stat_members: "Team Members",
-                stat_projects: "Completed Projects",
-                stat_ranking: "Teknofest Finalist",
-                stat_passion: "Passion & Innovation",
-                projects_title: "Our Projects",
-                project_hackathon: "AI-powered recommendation system developed for Teknofest Trendyol E-Commerce Hackathon. Top 10 finalist among 300+ teams with LLM-based personalized product predictions.",
-                project_formarch: "Multi-language corporate energy services platform with role-based interfaces, purchase processes, personalized discounts, and admin dashboard. Built with Laravel and modern web technologies.",
-                project_ud: "A compassionate mobile app that assists Alzheimer's patients and individuals with memory challenges.",
-                project_passtle: "A locally encrypted password manager with AES-256. Your privacy is our priority.",
-                project_oshara: "Smart expense-sharing platform for roommates. Fair calculations and a democratic reconciliation system.",
-                project_fotvia: "An AI-powered photo editing platform. Technology that revolutionizes image enhancement.",
-                project_ikra: "Book discovery and community platform. A comprehensive catalog that connects readers with their next favorites.",
-                project_hungerjet: "Next-gen delivery platform revolutionizing food ordering. Speed, quality, and satisfaction.",
-                team_title: "Our Team",
-                role_my: "Co-Founder | UI/UX Designer",
-                skills_my: "Mobile Development, User Experience",
-                role_mb: "Co-Founder | AI Specialist",
-                skills_mb: "Artificial Intelligence, Machine Learning",
-                role_m: "Co-Founder | Mobile Developer",
-                skills_m: "Flutter, Dart, Software Development",
-                role_as: "Full Stack Developer",
-                skills_as: "Frontend, Backend Integration",
-                role_mr: "AI Engineer",
-                skills_mr: "Data Analysis, Machine Learning",
-                role_mm: "Full Stack Developer",
-                skills_mm: "Data Analysis, Business Intelligence",
-                role_b: "Backend Developer",
-                skills_b: "APIs, Database Design, Security",
-                contact_title: "Let's Work Together",
-                contact_subtitle: "Looking for a professional team for your project? Contact us for innovation- and quality-focused solutions.",
-                contact_email: "Send Email",
-                footer_built: "Built with",
-                footer_by: "by M3Code Team",
-                footer_motto: '"Innovating Today, Shaping Tomorrow"'
-            },
-            tr: {
-                nav_home: "Ana Sayfa",
-                nav_projects: "Projeler",
-                nav_team: "Ekip",
-                nav_contact: "İletişim",
-                hero_title: "Bugünü Yeniliyoruz, Yarını Şekillendiriyoruz",
-                hero_subtitle: "Yapay zeka, mobil uygulama geliştirme ve web teknolojilerinde uzmanlaşmış dinamik bir yazılım ekibi.",
-                hero_cta1: "Projelerimizi Keşfedin",
-                hero_cta2: "Bize Ulaşın",
-                stat_members: "Ekip Üyesi",
-                stat_projects: "Tamamlanan Proje",
-                stat_ranking: "Teknofest Finalist",
-                stat_passion: "Tutku ve İnovasyon",
-                projects_title: "Projelerimiz",
-                project_hackathon: "Teknofest Trendyol E-Ticaret Hackathonu için geliştirilen yapay zeka destekli öneri sistemi. 300+ takım arasında ilk 10'a girerek LLM tabanlı kişiselleştirilmiş ürün tahminleri.",
-                project_formarch: "Rol tabanlı arayüzler, satın alma süreçleri, kişiselleştirilmiş indirimler ve yönetici panosu içeren çok dilli kurumsal enerji hizmetleri platformu. Laravel ve modern web teknolojileriyle geliştirildi.",
-                project_ud: "Alzheimer hastaları ve hafıza sorunları yaşayan bireylere yardımcı olan şefkatli bir mobil uygulama.",
-                project_passtle: "AES-256 ile yerel olarak şifrelenmiş şifre yöneticisi. Gizliliğiniz önceliğimizdir.",
-                project_oshara: "Ev arkadaşları için akıllı masraf paylaşım platformu. Adil hesaplamalar ve demokratik uzlaşma sistemi.",
-                project_fotvia: "Yapay zeka destekli fotoğraf düzenleme platformu. Görüntü iyileştirmeyi devrimleştiren teknoloji.",
-                project_ikra: "Kitap keşif ve topluluk platformu. Okuyucuları bir sonraki favorileriyle buluşturan kapsamlı katalog.",
-                project_hungerjet: "Yemek siparişini devrimleştiren yeni nesil teslimat platformu. Hız, kalite ve memnuniyet.",
-                team_title: "Ekibimiz",
-                role_my: "Kurucu Ortak | UI/UX Tasarımcı",
-                skills_my: "Mobil Geliştirme, Kullanıcı Deneyimi",
-                role_mb: "Kurucu Ortak | Yapay Zeka Uzmanı",
-                skills_mb: "Yapay Zeka, Makine Öğrenimi",
-                role_m: "Kurucu Ortak | Mobil Geliştirici",
-                skills_m: "Flutter, Dart, Yazılım Geliştirme",
-                role_as: "Full Stack Geliştirici",
-                skills_as: "Frontend, Backend Entegrasyonu",
-                role_mr: "Yapay Zeka Mühendisi",
-                skills_mr: "Veri Analizi, Makine Öğrenimi",
-                role_mm: "Full Stack Geliştirici",
-                skills_mm: "Veri Analizi, İş Zekası",
-                role_b: "Backend Geliştirici",
-                skills_b: "API'ler, Veritabanı Tasarımı, Güvenlik",
-                contact_title: "Birlikte Çalışalım",
-                contact_subtitle: "Projeniz için profesyonel bir ekip mi arıyorsunuz? İnovasyon ve kalite odaklı çözümler için bizimle iletişime geçin.",
-                contact_email: "E-posta Gönder",
-                footer_built: "ile yapıldı",
-                footer_by: "M3Code Ekibi tarafından",
-                footer_motto: '"Bugünü Yeniliyoruz, Yarını Şekillendiriyoruz"'
-            },
-            ar: {
-                nav_home: "الرئيسية",
-                nav_projects: "المشاريع",
-                nav_team: "الفريق",
-                nav_contact: "اتصل بنا",
-                hero_title: "نبتكر اليوم، نشكل الغد",
-                hero_subtitle: "فريق برمجيات ديناميكي متخصص في الذكاء الاصطناعي وتطوير تطبيقات الهاتف المحمول وتقنيات الويب.",
-                hero_cta1: "استكشف مشاريعنا",
-                hero_cta2: "اتصل بنا",
-                stat_members: "أعضاء الفريق",
-                stat_projects: "المشاريع المكتملة",
-                stat_ranking: "متأهل لـ Teknofest",
-                stat_passion: "الشغف والابتكار",
-                projects_title: "مشاريعنا",
-                project_hackathon: "نظام توصيات مدعوم بالذكاء الاصطناعي تم تطويره لهاكاثون Teknofest Trendyol للتجارة الإلكترونية. متأهل ضمن أفضل 10 فرق من بين أكثر من 300 فريق مع توقعات منتجات مخصصة قائمة على LLM.",
-                project_formarch: "منصة خدمات طاقة مؤسسية متعددة اللغات مع واجهات قائمة على الأدوار وعمليات شراء وخصومات مخصصة ولوحة تحكم إدارية. تم بناؤها باستخدام Laravel وتقنيات الويب الحديثة.",
-                project_ud: "تطبيق هاتف محمول عطوف يساعد مرضى الزهايمر والأفراد الذين يعانون من تحديات الذاكرة.",
-                project_passtle: "مدير كلمات مرور مشفر محلياً بتقنية AES-256. خصوصيتك هي أولويتنا.",
-                project_oshara: "منصة ذكية لمشاركة النفقات بين زملاء السكن. حسابات عادلة ونظام تسوية ديمقراطي.",
-                project_fotvia: "منصة تحرير صور مدعومة بالذكاء الاصطناعي. تقنية تُحدث ثورة في تحسين الصور.",
-                project_ikra: "منصة اكتشاف الكتب والمجتمع. كتالوج شامل يربط القراء بكتبهم المفضلة التالية.",
-                project_hungerjet: "منصة توصيل من الجيل التالي تُحدث ثورة في طلب الطعام. السرعة والجودة والرضا.",
-                team_title: "فريقنا",
-                role_my: "شريك مؤسس | مصمم UI/UX",
-                skills_my: "تطوير الهاتف المحمول، تجربة المستخدم",
-                role_mb: "شريك مؤسس | أخصائي الذكاء الاصطناعي",
-                skills_mb: "الذكاء الاصطناعي، التعلم الآلي",
-                role_m: "شريك مؤسس | مطور هاتف محمول",
-                skills_m: "Flutter، Dart، تطوير البرمجيات",
-                role_as: "مطور Full Stack",
-                skills_as: "Frontend، تكامل Backend",
-                role_mr: "مهندس ذكاء اصطناعي",
-                skills_mr: "تحليل البيانات، التعلم الآلي",
-                role_mm: "مطور Full Stack",
-                skills_mm: "تحليل البيانات، ذكاء الأعمال",
-                role_b: "مطور Backend",
-                skills_b: "واجهات برمجة التطبيقات، تصميم قواعد البيانات، الأمان",
-                contact_title: "لنعمل معاً",
-                contact_subtitle: "هل تبحث عن فريق محترف لمشروعك؟ اتصل بنا للحصول على حلول تركز على الابتكار والجودة.",
-                contact_email: "إرسال بريد إلكتروني",
-                footer_built: "صُنع بـ",
-                footer_by: "بواسطة فريق M3Code",
-                footer_motto: '"نبتكر اليوم، نشكل الغد"'
-            }
-        };
+      const translations = {
+        en: {
+          nav_home: "Home",
+          nav_projects: "Projects",
+          nav_team: "Team",
+          nav_contact: "Contact",
+          hero_title: "Innovating Today, Shaping Tomorrow",
+          hero_subtitle:
+            "A dynamic software team specialized in artificial intelligence, mobile app development, and web technologies.",
+          hero_cta1: "Explore Our Projects",
+          hero_cta2: "Contact Us",
+          stat_members: "Team Members",
+          stat_projects: "Completed Projects",
+          stat_ranking: "Teknofest Finalist",
+          stat_passion: "Passion & Innovation",
+          projects_title: "Our Projects",
+          project_hackathon:
+            "AI-powered recommendation system developed for Teknofest Trendyol E-Commerce Hackathon. Top 10 finalist among 300+ teams with LLM-based personalized product predictions.",
+          project_formarch:
+            "Multi-language corporate energy services platform with role-based interfaces, purchase processes, personalized discounts, and admin dashboard. Built with Laravel and modern web technologies.",
+          project_ud:
+            "A compassionate mobile app that assists Alzheimer's patients and individuals with memory challenges.",
+          project_passtle:
+            "A locally encrypted password manager with AES-256. Your privacy is our priority.",
+          project_oshara:
+            "Smart expense-sharing platform for roommates. Fair calculations and a democratic reconciliation system.",
+          project_fotvia:
+            "An AI-powered photo editing platform. Technology that revolutionizes image enhancement.",
+          project_ikra:
+            "Book discovery and community platform. A comprehensive catalog that connects readers with their next favorites.",
+          project_hungerjet:
+            "Next-gen delivery platform revolutionizing food ordering. Speed, quality, and satisfaction.",
+          team_title: "Our Team",
+          role_my: "Co-Founder | UI/UX Designer",
+          skills_my: "Mobile Development, User Experience",
+          role_mb: "Co-Founder | AI Specialist",
+          skills_mb: "Artificial Intelligence, Machine Learning",
+          role_m: "Co-Founder | Mobile Developer",
+          skills_m: "Flutter, Dart, Software Development",
+          role_as: "Full Stack Developer",
+          skills_as: "Frontend, Backend Integration",
+          role_mr: "AI Engineer",
+          skills_mr: "Data Analysis, Machine Learning",
+          role_mm: "Full Stack Developer",
+          skills_mm: "Data Analysis, Business Intelligence",
+          role_b: "Backend Developer",
+          skills_b: "APIs, Database Design, Security",
+          contact_title: "Let's Work Together",
+          contact_subtitle:
+            "Looking for a professional team for your project? Contact us for innovation- and quality-focused solutions.",
+          contact_email: "Send Email",
+          footer_built: "Built with",
+          footer_by: "by M3Code Team",
+          footer_motto: '"Innovating Today, Shaping Tomorrow"',
+        },
+        tr: {
+          nav_home: "Ana Sayfa",
+          nav_projects: "Projeler",
+          nav_team: "Ekip",
+          nav_contact: "İletişim",
+          hero_title: "Bugünü Yeniliyoruz, Yarını Şekillendiriyoruz",
+          hero_subtitle:
+            "Yapay zeka, mobil uygulama geliştirme ve web teknolojilerinde uzmanlaşmış dinamik bir yazılım ekibi.",
+          hero_cta1: "Projelerimizi Keşfedin",
+          hero_cta2: "Bize Ulaşın",
+          stat_members: "Ekip Üyesi",
+          stat_projects: "Tamamlanan Proje",
+          stat_ranking: "Teknofest Finalist",
+          stat_passion: "Tutku ve İnovasyon",
+          projects_title: "Projelerimiz",
+          project_hackathon:
+            "Teknofest Trendyol E-Ticaret Hackathonu için geliştirilen yapay zeka destekli öneri sistemi. 300+ takım arasında ilk 10'a girerek LLM tabanlı kişiselleştirilmiş ürün tahminleri.",
+          project_formarch:
+            "Rol tabanlı arayüzler, satın alma süreçleri, kişiselleştirilmiş indirimler ve yönetici panosu içeren çok dilli kurumsal enerji hizmetleri platformu. Laravel ve modern web teknolojileriyle geliştirildi.",
+          project_ud:
+            "Alzheimer hastaları ve hafıza sorunları yaşayan bireylere yardımcı olan şefkatli bir mobil uygulama.",
+          project_passtle:
+            "AES-256 ile yerel olarak şifrelenmiş şifre yöneticisi. Gizliliğiniz önceliğimizdir.",
+          project_oshara:
+            "Ev arkadaşları için akıllı masraf paylaşım platformu. Adil hesaplamalar ve demokratik uzlaşma sistemi.",
+          project_fotvia:
+            "Yapay zeka destekli fotoğraf düzenleme platformu. Görüntü iyileştirmeyi devrimleştiren teknoloji.",
+          project_ikra:
+            "Kitap keşif ve topluluk platformu. Okuyucuları bir sonraki favorileriyle buluşturan kapsamlı katalog.",
+          project_hungerjet:
+            "Yemek siparişini devrimleştiren yeni nesil teslimat platformu. Hız, kalite ve memnuniyet.",
+          team_title: "Ekibimiz",
+          role_my: "Kurucu Ortak | UI/UX Tasarımcı",
+          skills_my: "Mobil Geliştirme, Kullanıcı Deneyimi",
+          role_mb: "Kurucu Ortak | Yapay Zeka Uzmanı",
+          skills_mb: "Yapay Zeka, Makine Öğrenimi",
+          role_m: "Kurucu Ortak | Mobil Geliştirici",
+          skills_m: "Flutter, Dart, Yazılım Geliştirme",
+          role_as: "Full Stack Geliştirici",
+          skills_as: "Frontend, Backend Entegrasyonu",
+          role_mr: "Yapay Zeka Mühendisi",
+          skills_mr: "Veri Analizi, Makine Öğrenimi",
+          role_mm: "Full Stack Geliştirici",
+          skills_mm: "Veri Analizi, İş Zekası",
+          role_b: "Backend Geliştirici",
+          skills_b: "API'ler, Veritabanı Tasarımı, Güvenlik",
+          contact_title: "Birlikte Çalışalım",
+          contact_subtitle:
+            "Projeniz için profesyonel bir ekip mi arıyorsunuz? İnovasyon ve kalite odaklı çözümler için bizimle iletişime geçin.",
+          contact_email: "E-posta Gönder",
+          footer_built: "ile yapıldı",
+          footer_by: "M3Code Ekibi tarafından",
+          footer_motto: '"Bugünü Yeniliyoruz, Yarını Şekillendiriyoruz"',
+        },
+        ar: {
+          nav_home: "الرئيسية",
+          nav_projects: "المشاريع",
+          nav_team: "الفريق",
+          nav_contact: "اتصل بنا",
+          hero_title: "نبتكر اليوم، نشكل الغد",
+          hero_subtitle:
+            "فريق برمجيات ديناميكي متخصص في الذكاء الاصطناعي وتطوير تطبيقات الهاتف المحمول وتقنيات الويب.",
+          hero_cta1: "استكشف مشاريعنا",
+          hero_cta2: "اتصل بنا",
+          stat_members: "أعضاء الفريق",
+          stat_projects: "المشاريع المكتملة",
+          stat_ranking: "متأهل لـ Teknofest",
+          stat_passion: "الشغف والابتكار",
+          projects_title: "مشاريعنا",
+          project_hackathon:
+            "نظام توصيات مدعوم بالذكاء الاصطناعي تم تطويره لهاكاثون Teknofest Trendyol للتجارة الإلكترونية. متأهل ضمن أفضل 10 فرق من بين أكثر من 300 فريق مع توقعات منتجات مخصصة قائمة على LLM.",
+          project_formarch:
+            "منصة خدمات طاقة مؤسسية متعددة اللغات مع واجهات قائمة على الأدوار وعمليات شراء وخصومات مخصصة ولوحة تحكم إدارية. تم بناؤها باستخدام Laravel وتقنيات الويب الحديثة.",
+          project_ud:
+            "تطبيق هاتف محمول عطوف يساعد مرضى الزهايمر والأفراد الذين يعانون من تحديات الذاكرة.",
+          project_passtle:
+            "مدير كلمات مرور مشفر محلياً بتقنية AES-256. خصوصيتك هي أولويتنا.",
+          project_oshara:
+            "منصة ذكية لمشاركة النفقات بين زملاء السكن. حسابات عادلة ونظام تسوية ديمقراطي.",
+          project_fotvia:
+            "منصة تحرير صور مدعومة بالذكاء الاصطناعي. تقنية تُحدث ثورة في تحسين الصور.",
+          project_ikra:
+            "منصة اكتشاف الكتب والمجتمع. كتالوج شامل يربط القراء بكتبهم المفضلة التالية.",
+          project_hungerjet:
+            "منصة توصيل من الجيل التالي تُحدث ثورة في طلب الطعام. السرعة والجودة والرضا.",
+          team_title: "فريقنا",
+          role_my: "شريك مؤسس | مصمم UI/UX",
+          skills_my: "تطوير الهاتف المحمول، تجربة المستخدم",
+          role_mb: "شريك مؤسس | أخصائي الذكاء الاصطناعي",
+          skills_mb: "الذكاء الاصطناعي، التعلم الآلي",
+          role_m: "شريك مؤسس | مطور هاتف محمول",
+          skills_m: "Flutter، Dart، تطوير البرمجيات",
+          role_as: "مطور Full Stack",
+          skills_as: "Frontend، تكامل Backend",
+          role_mr: "مهندس ذكاء اصطناعي",
+          skills_mr: "تحليل البيانات، التعلم الآلي",
+          role_mm: "مطور Full Stack",
+          skills_mm: "تحليل البيانات، ذكاء الأعمال",
+          role_b: "مطور Backend",
+          skills_b: "واجهات برمجة التطبيقات، تصميم قواعد البيانات، الأمان",
+          contact_title: "لنعمل معاً",
+          contact_subtitle:
+            "هل تبحث عن فريق محترف لمشروعك؟ اتصل بنا للحصول على حلول تركز على الابتكار والجودة.",
+          contact_email: "إرسال بريد إلكتروني",
+          footer_built: "صُنع بـ",
+          footer_by: "بواسطة فريق M3Code",
+          footer_motto: '"نبتكر اليوم، نشكل الغد"',
+        },
+      };
 
-        let currentLang = 'en';
+      let currentLang = "en";
 
-        function toggleLangDropdown() {
-            const dropdown = document.getElementById('lang-dropdown');
-            dropdown.classList.toggle('active');
+      function toggleLangDropdown() {
+        const dropdown = document.getElementById("lang-dropdown");
+        dropdown.classList.toggle("active");
+      }
+
+      function changeLang(lang) {
+        currentLang = lang;
+        document.getElementById("current-lang").textContent =
+          lang.toUpperCase();
+
+        const options = document.querySelectorAll(".lang-option");
+        options.forEach((opt) => opt.classList.remove("active"));
+        event.target.closest(".lang-option").classList.add("active");
+
+        updateContent(lang);
+        toggleLangDropdown();
+
+        if (lang === "ar") {
+          document.body.style.direction = "rtl";
+        } else {
+          document.body.style.direction = "ltr";
         }
+      }
 
-        function changeLang(lang) {
-            currentLang = lang;
-            document.getElementById('current-lang').textContent = lang.toUpperCase();
-            
-            const options = document.querySelectorAll('.lang-option');
-            options.forEach(opt => opt.classList.remove('active'));
-            event.target.closest('.lang-option').classList.add('active');
-            
-            updateContent(lang);
-            toggleLangDropdown();
-            
-            if (lang === 'ar') {
-                document.body.style.direction = 'rtl';
-            } else {
-                document.body.style.direction = 'ltr';
-            }
+      function updateContent(lang) {
+        const elements = document.querySelectorAll("[data-key]");
+        elements.forEach((el) => {
+          const key = el.getAttribute("data-key");
+          if (translations[lang] && translations[lang][key]) {
+            el.textContent = translations[lang][key];
+          }
+        });
+      }
+
+      document.addEventListener("click", (e) => {
+        const dropdown = document.getElementById("lang-dropdown");
+        const langBtn = document.querySelector(".lang-btn");
+        if (!dropdown.contains(e.target) && !langBtn.contains(e.target)) {
+          dropdown.classList.remove("active");
         }
+      });
 
-        function updateContent(lang) {
-            const elements = document.querySelectorAll('[data-key]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
             });
+          }
+        });
+      });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      document
+        .querySelectorAll(".project-card, .team-card, .stat-item")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(30px)";
+          el.style.transition = "all 0.6s ease";
+          observer.observe(el);
+        });
+
+      const nav = document.querySelector("nav");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          nav.style.background = "rgba(255, 255, 255, 0.98)";
+          nav.style.boxShadow = "0 4px 30px rgba(0, 0, 0, 0.1)";
+        } else {
+          nav.style.background = "rgba(255, 255, 255, 0.95)";
+          nav.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.05)";
         }
+      });
 
-        document.addEventListener('click', (e) => {
-            const dropdown = document.getElementById('lang-dropdown');
-            const langBtn = document.querySelector('.lang-btn');
-            if (!dropdown.contains(e.target) && !langBtn.contains(e.target)) {
-                dropdown.classList.remove('active');
+      const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+      const navLinks = document.querySelector(".nav-links");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        navLinks.style.display =
+          navLinks.style.display === "flex" ? "none" : "flex";
+        if (navLinks.style.display === "flex") {
+          navLinks.style.position = "absolute";
+          navLinks.style.top = "100%";
+          navLinks.style.left = "0";
+          navLinks.style.right = "0";
+          navLinks.style.flexDirection = "column";
+          navLinks.style.background = "rgba(255, 255, 255, 0.98)";
+          navLinks.style.padding = "2rem";
+          navLinks.style.gap = "1.5rem";
+          navLinks.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.1)";
+        }
+      });
+
+      const animateCounter = (element, target) => {
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            element.innerHTML = element.innerHTML.replace(/\d+/, target);
+            clearInterval(timer);
+          } else {
+            element.innerHTML = element.innerHTML.replace(
+              /\d+/,
+              Math.floor(current)
+            );
+          }
+        }, 30);
+      };
+
+      const statsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const h3 = entry.target.querySelector("h3");
+              const text = h3.textContent;
+              const match = text.match(/\d+/);
+              if (match) {
+                const targetValue = parseInt(match[0]);
+                animateCounter(h3, targetValue);
+              }
+              statsObserver.unobserve(entry.target);
             }
-        });
+          });
+        },
+        { threshold: 0.5 }
+      );
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.project-card, .team-card, .stat-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
-                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
-            } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
-                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
-            }
-        });
-
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.background = 'rgba(255, 255, 255, 0.98)';
-                navLinks.style.padding = '2rem';
-                navLinks.style.gap = '1.5rem';
-                navLinks.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-            }
-        });
-
-        const animateCounter = (element, target) => {
-            let current = 0;
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.innerHTML = element.innerHTML.replace(/\d+/, target);
-                    clearInterval(timer);
-                } else {
-                    element.innerHTML = element.innerHTML.replace(/\d+/, Math.floor(current));
-                }
-            }, 30);
-        };
-
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const h3 = entry.target.querySelector('h3');
-                    const text = h3.textContent;
-                    const match = text.match(/\d+/);
-                    if (match) {
-                        const targetValue = parseInt(match[0]);
-                        animateCounter(h3, targetValue);
-                    }
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.stat-item').forEach(stat => {
-            statsObserver.observe(stat);
-        });
+      document.querySelectorAll(".stat-item").forEach((stat) => {
+        statsObserver.observe(stat);
+      });
     </script>
-</body>
+  </body>
 </html>
