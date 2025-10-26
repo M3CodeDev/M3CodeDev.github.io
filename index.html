@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3Code - Innovating Today, Shaping Tomorrow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #ffffff;
+            --bg-light: #f8fafc;
+            --gray: #64748b;
+            --text-dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.05em;
+            color: var(--text-dark);
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a i {
+            font-size: 1rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: var(--gray);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn i {
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .stat-item h3 i {
+            font-size: 2rem;
+        }
+
+        .stat-item p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .project-icon-emoji {
+            font-size: 2.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .project-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .team-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .team-card .role {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .team-card .skills {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--gray);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .social-links a:hover {
+            color: white;
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .contact p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            color: var(--gray);
+            background: white;
+            font-size: 0.9rem;
+        }
+
+        footer em {
+            font-family: 'JetBrains Mono', monospace;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .projects-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://github.com/M3CodeDev/.github/blob/main/profile/Logos/Logo.png?raw=true" alt="M3 Codes Logo">
+                <span class="logo-text">M3Code</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home"><i class="fas fa-home"></i> Ana Sayfa</a></li>
+                <li><a href="#projects"><i class="fas fa-folder-open"></i> Projeler</a></li>
+                <li><a href="#team"><i class="fas fa-users"></i> Ekip</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> İletişim</a></li>
+            </ul>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Innovating Today, Shaping Tomorrow</h1>
+            <p>Yapay zeka, mobil uygulama geliştirme ve web teknolojilerinde uzmanlaşmış dinamik bir yazılım ekibi</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> Projelerimizi Keşfedin</a>
+                <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> İletişime Geçin</a>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3><i class="fas fa-users"></i> 7+</h3>
+                <p>Ekip Üyesi</p>
+            </div>
+            <div class="stat-item">
+                <h3><i class="fas fa-rocket"></i> 6+</h3>
+                <p>Tamamlanan Proje</p>
+            </div>
+            <div class="stat-item">
+                <h3><i class="fas fa-trophy"></i> 7th</h3>
+                <p>TEKNOFEST Sıralaması</p>
+            </div>
+            <div class="stat-item">
+                <h3><i class="fas fa-fire"></i> 100%</h3>
+                <p>Tutku ve İnovasyon</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="projects">
+        <h2 class="section-title">Projelerimiz</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <img src="https://github.com/M3CodeDev/.github/blob/main/profile/Logos/udlogo.png?raw=true" alt="Unutma Dostu" class="project-icon">
+                    <h3>Unutma Dostu</h3>
+                </div>
+                <p>Alzheimer hastaları ve hafıza zorlukları yaşayan bireylere yardımcı olan compassionate bir mobil uygulama.</p>
+                <div class="tags">
+                    <span class="tag">Flutter</span>
+                    <span class="tag">Firebase</span>
+                    <span class="tag">Healthcare</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <img src="https://github.com/M3CodeDev/.github/blob/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/PasstleLogo.png?raw=true" alt="Passtle" class="project-icon">
+                    <h3>Passtle</h3>
+                </div>
+                <p>AES-256 şifreleme ile güvenli, yerel depolamalı şifre yönetim uygulaması. Gizliliğiniz önceliğimiz.</p>
+                <div class="tags">
+                    <span class="tag">Security</span>
+                    <span class="tag">Encryption</span>
+                    <span class="tag">Flutter</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <img src="https://github.com/M3CodeDev/.github/blob/a1aefbc672c95cc415c3f5145797fb5a6ce12b91/profile/Logos/OsharaLogo.png?raw=true" alt="Oshara" class="project-icon">
+                    <h3>Oshara</h3>
+                </div>
+                <p>Ev arkadaşları için akıllı gider paylaşım platformu. Adil hesaplama ve demokratik uzlaşma sistemi.</p>
+                <div class="tags">
+                    <span class="tag">Firebase</span>
+                    <span class="tag">Real-time</span>
+                    <span class="tag">Riverpod</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <img src="https://github.com/M3CodeDev/.github/blob/main/profile/Logos/FotviaLogo2.jpg?raw=true" alt="Fotvia" class="project-icon">
+                    <h3>Fotvia</h3>
+                </div>
+                <p>Yapay zeka destekli fotoğraf düzenleme platformu. Görüntü iyileştirmede devrim yaratan teknoloji.</p>
+                <div class="tags">
+                    <span class="tag">AI/ML</span>
+                    <span class="tag">Computer Vision</span>
+                    <span class="tag">Active</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <img src="https://github.com/M3CodeDev/.github/blob/main/profile/Logos/ikaricon.png?raw=true" alt="Ikra" class="project-icon">
+                    <h3>Ikra</h3>
+                </div>
+                <p>Kitap keşif ve topluluk platformu. Okuyucuları bir sonraki favorileriyle buluşturan kapsamlı katalog.</p>
+                <div class="tags">
+                    <span class="tag">Social</span>
+                    <span class="tag">Recommendations</span>
+                    <span class="tag">Active</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon-emoji">🍕</div>
+                    <h3>HungerJet</h3>
+                </div>
+                <p>Yemek siparişini devrimleştiren yeni nesil teslimat platformu. Hız, kalite ve memnuniyet.</p>
+                <div class="tags">
+                    <span class="tag">E-commerce</span>
+                    <span class="tag">Real-time Tracking</span>
+                    <span class="tag">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="team">
+        <h2 class="section-title">Ekibimiz</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="avatar">MY</div>
+                <h4>Muhammed Yusufoglu</h4>
+                <p class="role">Co-Founder | UI/UX Designer</p>
+                <p class="skills">Mobile Development, User Experience</p>
+                <div class="social-links">
+                    <a href="https://github.com/mxy963" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/mxy963/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="avatar">MB</div>
+                <h4>Muhammed Bereket</h4>
+                <p class="role">Co-Founder | AI Specialist</p>
+                <p class="skills">Artificial Intelligence, Machine Learning</p>
+                <div class="social-links">
+                    <a href="https://github.com/MuBereket" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/muhammed-bereket-526390307" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="avatar">M</div>
+                <h4>Mahmoud Basmaci</h4>
+                <p class="role">Co-Founder | Mobile Developer</p>
+                <p class="skills">Flutter, Dart, Software Development</p>
+                <div class="social-links">
+                    <a href="https://github.com/Mahmut0b" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/mahmutbasmaci/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="avatar">AS</div>
+                <h4>Ahmed Salih</h4>
+                <p class="role">Full Stack Developer</p>
+                <p class="skills">Frontend, Backend Integration</p>
+                <div class="social-links">
+                    <a href="https://github.com/Ahmedsall1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/ahmed-salih11/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="avatar">MR</div>
+                <h4>Mutez Rahal</h4>
+                <p class="role">AI Engineer</p>
+                <p class="skills">Data Analysis, Machine Learning</p>
+                <div class="social-links">
+                    <a href="https://github.com/Mutez-Rahal" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/mutez-rahal/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="avatar">MM</div>
+                <h4>Malik Muhammed</h4>
+                <p class="role">Full Stack Developer</p>
+                <p class="skills">Data Analysis, Business Intelligence</p>
+                <div class="social-links">
+                    <a href="https://github.com/malikmaky" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/malik-muhammed/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="avatar">B</div>
+                <h4>Bahaa</h4>
+                <p class="role">Backend Developer</p>
+                <p class="skills">APIs, Database Design, Security</p>
+                <div class="social-links">
+                    <a href="https://github.com/BhaaSyr" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/bahaa-aldin-alzhouri-80b994232/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Birlikte Çalışalım</h2>
+            <p>Projeniz için profesyonel bir ekip mi arıyorsunuz? İnovasyon ve kalite odaklı çözümler için bizimle iletişime geçin.</p>
+            <div class="cta-buttons">
+                <a href="mailto:info.m3code@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> E-posta Gönder</a>
+                <a href="https://www.linkedin.com/company/m3codes" class="btn btn-secondary" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 M3Code. Built with <i class="fas fa-heart" style="color: #ec4899;"></i> by M3Code Team</p>
+        <p><em>"Innovating Today, Shaping Tomorrow"</em></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .team-card, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Navbar background on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.9)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.background = 'rgba(255, 255, 255, 0.98)';
+                navLinks.style.padding = '2rem';
+                navLinks.style.gap = '1.5rem';
+                navLinks.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Counter animation for stats
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + (element.textContent.includes('th') ? 'th' : element.textContent.includes('%') ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (element.textContent.includes('th') ? 'th' : element.textContent.includes('%') ? '%' : '+');
+                }
+            }, 30);
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const h3 = entry.target.querySelector('h3');
+                    const targetValue = parseInt(h3.textContent);
+                    if (!isNaN(targetValue)) {
+                        animateCounter(h3, targetValue);
+                    }
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-item').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+    </script>
+</body>
+</html>
